@@ -1,0 +1,7 @@
+<div class="wrapper-cart">
+  <h1>Shopping Cart</h1>
+
+  <div *ngIf="isVisible">Hello world</div>
+
+  <app-product-item [products]="products" (dataEvent)="handleDelete($event)"></app-product-item>
+</div>

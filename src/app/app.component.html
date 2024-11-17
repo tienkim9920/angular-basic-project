@@ -1,44 +1,6 @@
 <main class="main">
   <header-layout />
-
-  <div class="wrapper-cart">
-    <h1>Shopping Cart</h1>
-
-    <div *ngIf="isVisible">Hello world</div>
-    
-    <div class="group-cart">
-      <div class="header-cart">
-        <div class="col-1">Image</div>
-        <div class="col-2">Name</div>
-        <div class="col-3">Price</div>
-        <div class="col-4">Action</div>
-      </div>
-      <div class="body-cart">
-        <div class="row-cart" *ngFor="let product of products">
-          <div class="col-1">
-            <img
-              width="50px"
-              height="auto"
-              src="{{ product.image }}"
-              alt="SambaOG"
-            />
-          </div>
-          <div class="col-2">{{ product.name | upperCasePipe }}</div>
-          <div class="col-3">{{ product.price | currencyPipe }}</div>
-          <div class="col-4">
-            <div class="btn-main">
-              <img
-                width="20px"
-                height="auto"
-                src="assets/images/bin.png"
-                alt="Delete"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <router-outlet />
 </main>
 
-<router-outlet />
+
