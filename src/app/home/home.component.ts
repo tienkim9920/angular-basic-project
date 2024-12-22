@@ -1,23 +1,28 @@
-import { Component } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProductItems } from '../shared/types/productItem';
+import { BlogService } from '../../services/BlogService';
 import { ProductItemComponent } from '../shared/product-item/productItem.component';
+import { ProductItems } from '../shared/types/productItem';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, ProductItemComponent],
+  imports: [RouterOutlet, ProductItemComponent, NgIf],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
   nameBtn = 'Click Me!';
 
   clickMessage = '';
 
   bindingMessage = '';
 
-  isVisible = false;
+  isVisible = true;
+
+  getBlogApi: Subscription;
 
   products: ProductItems[] = [
     {
@@ -46,16 +51,42 @@ export class HomeComponent {
     },
   ];
 
+  constructor(private blogService: BlogService) {
+    console.log('Initalize Component');
+    this.getBlogApi = new Subscription();
+  }
+
+  ngOnInit(): void {
+    this.getBlogApi = this.blogService.getBlogs().subscribe(({ data }) => {
+      this.products = data.map((item: any) => {
+        return {
+          ...item,
+          name: item.title,
+          price: Number(item.body),
+          image: 'assets/images/samba-og.jpg',
+        };
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.getBlogApi) {
+      this.getBlogApi.unsubscribe();
+      console.log('getBlogApi unsubscribed');
+    }
+  }
+
   handleClickMe(): void {
     this.clickMessage = 'Click Me Hello World';
   }
 
   handleDelete = (id: number) => {
-    const productIndex = this.products.findIndex(item => item.id == id);
-    if (productIndex !== -1) {
-      this.products.splice(productIndex, 1);
-    }
-  }
+    this.products = this.products.filter((item) => item.id !== id);
+  };
+
+  handleChangeVisible = () => {
+    this.isVisible = false;
+  };
 
   updateField(): void {
     console.log('Hello world');
