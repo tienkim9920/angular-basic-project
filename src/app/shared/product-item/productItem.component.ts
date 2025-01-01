@@ -35,12 +35,12 @@ export class ProductItemComponent implements OnChanges, OnDestroy {
 
   @Output() dataEvent = new EventEmitter<number>();
 
-  get totalPrice(): string {
+  get totalPrice(): number {
     const sum = this.products.reduce((total, item) => {
       return total + item.price;
     }, 0);
 
-    return `Total Price ${sum}`;
+    return sum;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

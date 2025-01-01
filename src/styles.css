@@ -29,3 +29,13 @@ h1 {
   font-optical-sizing: auto;
   font-style: normal;
 }
+
+.btn-navigation {
+  background-image: linear-gradient(to right, #d434b0, #8029fc);
+  padding: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+}

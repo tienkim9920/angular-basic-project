@@ -1,1 +1,16 @@
-<h2>Detail Product {{ id }}</h2>
+<div class="wrapper-cart">
+  <h1>Detail Product</h1>
+
+  <div *ngIf="productItem.id" style="padding: 0 3rem; color: #fff">
+    <div style="display: flex; justify-content: center;">
+      <img
+        src="{{ productItem.image }}"
+        alt="Ninedev"
+        width="75%"
+        height="auto"
+      />
+    </div>
+    <h3>Name product: {{ productItem.name }}</h3>
+    <h4>Price product: {{ productItem.price | currencyPipe }}</h4>
+  </div>
+</div>
