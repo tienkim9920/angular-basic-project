@@ -6,9 +6,11 @@ import {
   withPreloading,
 } from '@angular/router';
 
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
+import { reducers } from './store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +22,6 @@ export const appConfig: ApplicationConfig = {
     ), // Thêm chế độ preloading và hash location
     provideClientHydration(),
     provideHttpClient(withFetch()),
+    provideStore(reducers),
   ],
 };
