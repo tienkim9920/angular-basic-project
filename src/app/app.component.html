@@ -1,6 +1,9 @@
 <main class="main">
   <header-layout />
   <h2 style="color: black;">Count: {{ counter$ | async }}</h2>
+  <button (click)="onIncrement()">onIncrement</button>
+  <button (click)="onDecrement()">onDecrement</button>
+  <button (click)="onReset()">onReset</button>
   <router-outlet />
 </main>
 

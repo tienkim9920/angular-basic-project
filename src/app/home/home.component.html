@@ -3,7 +3,7 @@
 
   <div *ngIf="isVisible">
     <app-product-item
-      [products]="products"
+      [products]="{{ blogs$ | async }}"
       (dataEvent)="handleDelete($event)"
     ></app-product-item>
   </div>
